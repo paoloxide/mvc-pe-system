@@ -1,0 +1,191 @@
+<div class="sidebar">
+    <div class="sidebar-link">
+    	<a href="/admin/schedule"><div><p><i class="fa fa-book side-header-icon"></i><span class="side-name">Schedules
+        	</span></p></div></a>
+    	<a href="/admin/list"><div><p><i class="fa fa-folder-open-o side-header-icon"></i><span class="side-name">Class Lists
+        	</span></p></div></a>
+    	<a href="/admin/students"><div><p><i class="fa fa-users side-header-icon"></i><span class="side-name">Students
+        	</span></p></div></a>
+    	<a href="/admin/professors"><div><p><i class="fa fa-bank side-header-icon"></i><span class="side-name">Professors
+        	</span></p></div></a>
+    	<a href="/admin/grade"><div><p><i class="fa fa-bar-chart-o side-header-icon"></i><span class="side-name">Report of Grades
+        	</span></p></div></a>
+    	<a href="/admin/request"><div><p><i class="fa fa-mail-forward side-header-icon"></i><span class="side-name">Transfer Requests
+        	</span></p></div></a>
+    	<a href="/accounts/account"><div style="border-bottom: 1px solid rgba(256, 256, 256, 0.6);"><p>
+        	<i class="fa fa-gears side-header-icon"></i><span class="side-name">Account Settings</span></p></div></a>
+    </div>
+    <div class="sidebar-show">
+    	<span class="minimize"><i class="fa fa-arrow-circle-left side-btn"></i></span>
+    </div>
+    <div class="sidebar-show">
+	    <span class="maximize" hidden="true"><i class="fa fa-arrow-circle-right side-btn"></i></span>
+	</div>
+</div>
+<div class="home-body-max">
+	<span style="margin: 10px 10px 0 0; font-size:36px"><i class="fa fa-gears"></i></span>
+	<p class="schedule-title" style="display: inline">Account Settings</p>
+    <button class="btn btn-success" data-toggle="modal" data-target="#add-schedule" style="display: inline; float:right; margin: 10px 25px 0 0;"><i class="fa fa-plus-circle" style="margin-right: 5px"></i>Add Schedule</button>
+    <?php if(!empty($schedule)): ?>
+    	<button class="btn btn-success" style="display: inline; float:right; margin: 10px 25px 0 0;"><i class="fa fa-print" style="margin-right: 5px"></i>Print Schedule</button>
+	<?php endif; ?>
+    <form class="register-account-form" action="/accounts/account" method="post" style="float: right; margin: 10px 10px 0 0;">
+	    <select name="function-flag" class="selectpicker register-account">
+        	<?php if(empty($_COOKIE['pageUser'])): ?>
+            	<option value="student">Student</option>
+                <option value="professor">Professor</option>
+			<?php else: ?>
+		    	<option value="<?php echo $_COOKIE['pageUser']; ?>"><?php echo $_COOKIE['pageUser']; ?></option>
+		        <option value="<?php if($_COOKIE['pageUser'] == 'student') echo 'professor'; else echo 'student'; ?>">
+        	    	<?php if($_COOKIE['pageUser'] == 'student') echo 'Professor'; else echo 'Student'; ?></option>
+	    	<?php endif; ?>
+        </select>
+        <input class="register-account-submit" type="submit" hidden="true" />
+    </form>
+    <div class="schedule-container">
+    	<div class="panel panel-default panel-schedule">
+        	<div class="panel-heading container-fluid" style="background: rgba(0,102,255,0.8);">
+	            <div class="col-md-12 col-heading register-header"><i class="fa fa-book register-header-icon"></i>
+                	LIST OF ACCOUNTS
+					<?php //if(isset($pageUser)): ?>
+                    <?php //if($pageUser == 'student'): echo 'STUDENT'; ?>
+                    <?php //elseif($pageUser == 'professor'): echo 'PROFESSOR'; ?>
+                    <?php //endif; ?>
+                    <?php //endif; ?>
+                </div>
+			</div>
+<!-- ACCORDION -->
+          <div id="accordion">
+	<h3>Professor</h3>
+	<div>
+		<div class="panel-heading container-fluid" style="background: rgba(51,204,51,0.7);">
+	            <div class="col-md-1 col-heading" style="font-size:15px; font-family:inherit; width: 200px;">FULL NAME</div>
+	            <div class="col-md-3 col-heading" style="font-size:15px; font-family:inherit;">PLM ID</div>
+	            <div class="col-md-2 col-heading" style="font-size:15px; font-family:inherit; width: 200px;">USERNAME</div>
+	            <div class="col-md-3 col-heading" style="font-size:15px; font-family:inherit;">ACCESS TYPE</div>
+		</div>
+		<div class="panel-schedule-body container-fluid" data-toggle="modal" data-target="#edit-schedule" style="margin-top: 10px;">
+	            <div class="col-md-1 col-heading" style="font-size:12px; font-family:inherit; width: 200px; color: black;">Dabyd Erickson G. Catahan</div>
+	            <div class="col-md-3 col-heading" style="font-size:12px; font-family:inherit; color: black;">201110168</div>
+	            <div class="col-md-2 col-heading" style="font-size:12px; font-family:inherit; width: 200px; color: black;">degcatahan@plm.edu.ph</div>
+	            <div class="col-md-3 col-heading" style="font-size:12px; font-family:inherit; color: black;">admin</div>
+		</div>
+		<div class="panel-schedule-body container-fluid" data-toggle="modal" data-target="#edit-schedule" style="margin-top: 10px;">
+	            <div class="col-md-1 col-heading" style="font-size:12px; font-family:inherit; width: 200px; color: black;">Paolo T. Lambojon</div>
+	            <div class="col-md-3 col-heading" style="font-size:12px; font-family:inherit; color: black;">201110168</div>
+	            <div class="col-md-2 col-heading" style="font-size:12px; font-family:inherit; width: 200px; color: black;">ptlambojon@plm.edu.ph</div>
+	            <div class="col-md-3 col-heading" style="font-size:12px; font-family:inherit; color: black;">hampaslupa</div>
+		</div>
+	</div>
+	<h3>Student</h3>
+	<div>
+		<div class="panel-heading container-fluid" style="background: rgba(51,204,51,0.7);">
+	            <div class="col-md-1 col-heading"  style="font-size:15px; font-family:inherit; width: 150px;">NAME</div>
+	            <div class="col-md-3 col-heading" style="font-size:15px; font-family:inherit;">STUDENT NO.</div>
+	            <div class="col-md-2 col-heading" style="font-size:15px; font-family:inherit;">USERNAME</div>
+	            <div class="col-md-3 col-heading" style="font-size:15px; font-family:inherit;">COLLEGE</div>
+	            <div class="col-md-2 col-heading"style="font-size:15px; font-family:inherit; width: 100px;">YEAR</div>
+		</div>
+		<div class="panel-schedule-body container-fluid" data-toggle="modal" data-target="#add-schedule" style="margin-top: 10px;">
+	             <div class="col-md-1 col-heading"  style="font-size:12px; font-family:inherit; width: 150px; color: black;">Dabyd Erickson G. Catahan</div>
+	            <div class="col-md-3 col-heading" style="font-size:12px; font-family:inherit; color: black;">201110168</div>
+	            <div class="col-md-2 col-heading" style="font-size:12px; font-family:inherit; color: black;">degcatahan@plm.edu.ph</div>
+	            <div class="col-md-3 col-heading" style="font-size:12px; font-family:inherit; color: black;">CET</div>
+	            <div class="col-md-2 col-heading"style="font-size:12px; font-family:inherit; width: 100px; color: black;">1st</div>
+		</div>
+	</div>
+</div>
+<!---------------------------------------------->
+	</div>
+</div>
+        </div>
+	</div>
+</div>
+
+<!--EDIT PROFESSOR ACCOUNT MODAL -->
+
+<div class="modal fade" id="edit-schedule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background: rgba(51,204,51,0.7); color: #FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">
+        	<span class="side-header-icon"><i class="fa fa-book fa-4"></i></span>
+			<strong> Edit Professor Account</strong>
+        </h4>
+      </div>
+      <div class="modal-body"> 
+      	<form class="edit-schedule" action="../schedule" method="post">
+        	<input name="function-flag" value="edit-schedule" hidden="true"/>
+        	<p class="edit-title">Full Name:</p>
+        	<input class="form-control edit-input" name="fname" required="required" />
+            <p class="edit-title">PLM ID:</p>
+            <input class="form-control edit-input" name="plmid" required="required" />
+            <p class="edit-title">Username:</p>
+            <input class="form-control edit-input" name="username" required="required"  />
+            <p class="edit-title">Password:</p>
+            <input class="form-control edit-input" name="password" required="required"  />
+            <p class="edit-title">Re-enter Password:</p>
+			<input class="form-control edit-input" name="repassword" required="required"  />
+			<p class="edit-title">Access Type:</p>
+            <select class="form-control edit-input" name="accesstype">
+            	<option>Professor</option>
+				<option>Admin</option>
+            </select>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--EDIT STUDENT ACCOUNT MODAL -->
+
+<div class="modal fade" id="add-schedule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background: rgba(51,204,51,0.7); color: #FFF">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">
+        	<span class="side-header-icon"><i class="fa fa-book fa-4"></i></span>
+			<strong> Edit Professor Account</strong>
+        </h4>
+      </div>
+      <div class="modal-body"> 
+      	<form class="edit-schedule" action="../schedule" method="post">
+        	<input name="function-flag" value="edit-schedule" hidden="true"/>
+        	<p class="edit-title">First Name:</p>
+        	<input class="form-control edit-input" name="fname" required="required" />
+			<p class="edit-title">Middle Name:</p>
+        	<input class="form-control edit-input" name="fname" required="required" />
+			<p class="edit-title">Last Name:</p>
+        	<input class="form-control edit-input" name="fname" required="required" />
+            <p class="edit-title">Student Number:</p>
+            <input class="form-control edit-input" name="plmid" required="required" />
+            <p class="edit-title">Username:</p>
+            <input class="form-control edit-input" name="username" required="required"  />
+            <p class="edit-title">Password:</p>
+            <input class="form-control edit-input" name="password" required="required"  />
+            <p class="edit-title">Re-enter Password:</p>
+			<input class="form-control edit-input" name="repassword" required="required"  />
+			<p class="edit-title">Year:</p>
+            <input class="form-control edit-input" name="password" required="required"  />
+			<p class="edit-title">College:</p>
+            <select class="form-control edit-input" name="accesstype">
+            	<option>CAE</option>
+				<option>CET</option>
+            </select>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

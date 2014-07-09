@@ -1,0 +1,75 @@
+<style>
+.header-logo {
+	margin: 0;
+	padding: 0;
+}
+.navbar-default {
+	border-radius: 0;
+	margin-bottom: 0;
+	height: 70px;
+}
+
+.header-icon {
+	margin-right: 10px;
+}
+.header-li {
+	margin-top: 10px;
+}
+.header-link {
+	color: #FFF;
+	font-size: 18px;
+	font-weight: 300;
+	height: 70px;
+	padding: 10px;
+}
+
+.header-link:hover {
+	border-bottom: 5px solid #FC0;
+	color: #FC0;
+	cursor: pointer;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+a.log-out {
+	text-decoration: none;
+}
+
+.current {
+	background: rgba(256,256,256, 1);
+	border-bottom: 5px solid #09C;
+	color: #000;
+}
+
+</style>
+<header>
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+   		<div class="navbar-header">
+    	  	<img class="header-logo" src="/assets/images/COPERS-head.png" height="70" width="199" />
+    	</div>
+        <div class="header-anchor">
+        <a href="/logout">
+        	<div class="nav navbar-right header-link">
+        		<p class="header-li log-out"><i class="fa fa-power-off header-icon"></i>Log out</p>
+      		</div>
+        </a>
+        <a href="/profile">
+        	<div id="profile-click" class="nav navbar-right header-link">
+	        	<p class="header-li log-out"><i class="fa fa-user header-icon"></i>Profile</p>
+      		</div>
+        </a>
+        <a href="/home">
+        	<div id="profile-click" class="nav navbar-right header-link">
+	        	<p class="header-li log-out"><i class="fa fa-home header-icon"></i>Home</p>
+      		</div>
+        </a>
+        </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>

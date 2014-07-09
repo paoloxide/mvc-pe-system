@@ -1,0 +1,206 @@
+<style>
+@media screen and (max-width: 1000px) {
+   .login-panel-side-container {
+		display: none !important;
+	}
+	
+	.login-pe-container {
+		display: none !important;
+	}
+	
+	.login-panel {
+		margin: 0 auto;
+	}
+}
+/*
+@media (max-width: @screen-xs-max) { ... }
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) { ... }
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) { ... }
+@media (min-width: @screen-lg-min) { ... }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { ... }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) { ... }
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) { ... }
+
+.login-body {
+	background: url(assets/images/login_wp2.jpg);
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.login-panel {
+	background: rgba(255, 255, 255, 0.8);
+	min-height: 230px;
+	width: 380px;
+}
+
+.login-panel-side {
+	background: rgba(255, 255, 255, 0.8);
+	float: right;
+	min-height: 230px;
+	width: 430px;
+}
+
+.login-row {
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.login-form {
+	border-radius: 4px;
+	margin-top: 10px;
+}
+
+.login-btn {
+	font-size:16px;
+	font-weight: 300;
+	margin-top: 15px;
+	min-width: 100px;
+	
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+a.login-forgot {
+	text-decoration: none;
+}
+
+.login-btn-forgot, .login-btn-back {
+	background-color: transparent;
+	border: none;
+	color: #09C;
+	outline: none;
+	margin-top: 15px;
+}
+
+.login-btn-back {
+	display: none;
+}
+
+.login-btn-forgot:hover, .login-btn-back:hover {
+	color: #04C;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+.login-forgot-lbl {
+	padding: 0px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+
+.login-logo-container {
+	margin-top:30px;
+}
+
+.login-logo {
+	margin: 0 auto; 
+	width: 430px;
+}
+
+.login-panel-side-container {
+	padding: 0;
+}
+
+.login-welcome {
+	font-weight: 300; 
+	margin-top:35px;
+}
+
+.login-welcome-subhead {
+	color: #999;
+	font-size:18px; 
+	font-weight:400;
+}
+
+.login-pe-container {
+	height:280px;
+	position: absolute; 
+	width:100%; 
+}
+
+.login-pe {
+	margin: 0 auto; 
+	margin-top: 92px; 
+	width: 390px;
+}
+
+.login-form-container {
+	padding-left: 2px;
+}
+
+.login-form-head {
+	 font-weight: 300;
+	 margin-bottom: 15px; 
+	 margin-top:12px; 
+}
+
+</style>
+<div class="container-fluid login-body">
+	<div class="row login-logo-container">
+    	<div class="login-logo">
+        	<img src="/assets/images/COPERS-head.png">
+        </div>
+    </div>
+	<div class="row login-row">
+	    <div class="col-md-6 login-panel-side-container">
+       		<div class="panel panel-default login-panel-side">
+				<div class="panel-body">
+		    	   <h3 class="login-welcome">Welcome to PE Enrolment System</h3>
+                   <span class="login-welcome-subhead">Manage schedules, enlist in subject <br>and start your class.</span>
+				</div>
+    		</div>
+        </div>
+        <div class="login-pe-container">
+        	<div class="login-pe">
+	        	<img src="/assets/images/pe.png" width="180" height="180" />				
+    		</div>
+        </div>
+        <div class="col-md-6 login-form-container">
+			<div class="panel panel-default login-panel">
+				<div class="panel-body">
+                	<h3 id="login-form-head" class="login-form-head">Sign in to your account.</h3>
+                    <h3 id="login-forgot-head" class="login-form-head" hidden="true">Password Recovery.</h3>
+                    <p style="background-color: rgba(153, 0, 0, 0.9); margin-top: -12px; color: #FFF; text-indent: 2px; <?php if(!isset($_SESSION['errorMessage'])) echo 'display: none'?>">
+                    	<?php if(isset($_SESSION['errorMessage'])):?>
+						<?php echo $_SESSION['errorMessage']; ?>
+						<?php unset($_SESSION['errorMessage']); ?>
+						<?php endif; ?>
+                        <i class="fa fa-exclamation"></i>
+                    </p>
+		    	    <form id="login-form" action="#" method="post">
+                    	<input hidden="true" name="login-form" value="not-forgot" />
+				    	<input class="form-control login-form" name="email" placeholder="Email" type="email" required />
+				        <input class="form-control login-form" name="password" placeholder="Password" type="password" required />
+				        <input class="btn btn-primary login-btn" type="submit" value="Sign in" />
+				    	<button class="btn login-btn-forgot"><i>Forgot password?</i></button>
+                    </form>
+       				<!-- FORGOT PASSWORD -->
+                     <form id="login-forgot-form" action="#" method="post" hidden="true">
+                     	<input hidden="true" name="login-form" value="forgot" />
+				    	<input class="form-control login-form" name="email" placeholder="Email" type="email" required />
+                        <p class="login-forgot-lbl">Please enter your e-mail address for you to be able to change your password.</p>
+				        <input class="btn btn-primary login-btn" type="submit" value="Recover Password" />
+				    	<button class="btn login-btn-back"><i>Sign in</i></button>
+                    </form>
+				</div>
+    		</div>
+    	</div>
+    </div>
+</div>

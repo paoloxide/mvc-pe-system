@@ -1,0 +1,54 @@
+<div class="sidebar">
+    <div class="sidebar-link">
+    	<a href="/admin/schedule"><div><p><i class="fa fa-book side-header-icon"></i><span class="side-name">Schedules
+        	</span></p></div></a>
+    	<a href="/admin/list"><div><p><i class="fa fa-folder-open-o side-header-icon"></i><span class="side-name">Class Lists
+        	</span></p></div></a>
+    	<a href="/admin/students"><div><p><i class="fa fa-users side-header-icon"></i><span class="side-name">Students
+        	</span></p></div></a>
+    	<a href="/admin/professors"><div><p><i class="fa fa-bank side-header-icon"></i><span class="side-name">Professors
+        	</span></p></div></a>
+    	<a href="/admin/grade"><div><p><i class="fa fa-bar-chart-o side-header-icon"></i><span class="side-name">Report of Grades
+        	</span></p></div></a>
+    	<a href="/admin/request"><div><p><i class="fa fa-mail-forward side-header-icon"></i><span class="side-name">Transfer Requests
+        	</span></p></div></a>
+    	<a href="/accounts/account"><div style="border-bottom: 1px solid rgba(256, 256, 256, 0.6);"><p>
+        	<i class="fa fa-gears side-header-icon"></i><span class="side-name">Account Settings</span></p></div></a>
+    </div>
+    <div class="sidebar-show">
+    	<span class="minimize"><i class="fa fa-arrow-circle-left side-btn"></i></span>
+    </div>
+    <div class="sidebar-show">
+	    <span class="maximize" hidden="true"><i class="fa fa-arrow-circle-right side-btn"></i></span>
+	</div>
+</div>
+
+<div class="home-body-max">
+	<span style="margin: 10px 10px 0 0; font-size:36px"><i class="fa fa-mail-forward"></i></span>
+	<p class="schedule-title" style="display: inline">Transfer Request</p>
+    <button class="btn btn-success" data-toggle="modal" data-target="#add-schedule" style="display: inline; float:right; margin: 10px 25px 0 0;"><i class="fa fa-plus-circle" style="margin-right: 5px"></i>Add Schedule</button>
+    <?php if(!empty($schedule)): ?>
+    	<button class="btn btn-success" style="display: inline; float:right; margin: 10px 25px 0 0;"><i class="fa fa-print" style="margin-right: 5px"></i>Print Schedule</button>
+	<?php endif; ?>
+    <form class="register-account-form" action="/account" method="post" style="float: right; margin: 10px 10px 0 0;">
+	    <select name="function-flag" class="selectpicker register-account">
+	    	<option value="student">Student</option>
+	        <option value="professor" class="active">Professor</option>
+	    </select>
+        <input class="register-account-submit" type="submit" hidden="true" />
+    </form>
+    <div class="schedule-container">
+    	<div class="panel panel-default panel-schedule">
+        	<div class="panel-heading container-fluid" style="background: rgba(0,102,255,0.8);">
+	            <div class="col-md-12 col-heading register-header"><i class="fa fa-book register-header-icon"></i>
+                	REGISTER 
+					<?php if(isset($pageUser)): ?>
+                    <?php if($pageUser == 'student'): echo 'STUDENT'; ?>
+                    <?php elseif($pageUser == 'professor'): echo 'PROFESSOR'; ?>
+                    <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+			</div>
+        </div>
+	</div>
+</div>

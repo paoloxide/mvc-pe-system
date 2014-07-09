@@ -1,0 +1,119 @@
+$(window).load(function() {
+	$('.selectpicker').selectpicker();
+    // start up after 2sec
+    window.setTimeout(function(){
+        $('body').removeClass("loading").addClass('loaded');
+    }, 800);
+	
+	if($.cookie('sidebar-active') == 'true') {
+		$('.minimize').parent('div').parent('div').addClass('minified-sidebar-active');
+		$('.side-name').hide();
+		$('.maximize').show();
+		$('.minimize').hide();
+		$('.schedule-title').parent('div').addClass('home-body-min').removeClass('home-body-max');
+	} else {
+		$('.maximize').parent('div').parent('div').removeClass('minified-sidebar-active');
+	}
+	
+	var href = window.location.pathname;
+	$('.header-anchor').children('a').each(function() {
+		if(href == $(this).attr('href')) {
+			$(this).children('div').addClass('current');
+		}
+    });
+	
+	$('.sidebar-link').children('a').each(function() {
+		if(href == $(this).attr('href')) {
+			$(this).children('div').addClass('current-sidebar');
+		}
+    });
+	
+	$('.minimize').click(function(e) {
+        e.preventDefault();
+		$(this).parent('div').parent('div').addClass('minified-sidebar');
+		$('.side-name').hide();
+		$('.maximize').show();
+		$('.minimize').hide();
+		$('.schedule-title').parent('div').addClass('home-body-min').removeClass('home-body-max');
+		$.cookie('sidebar-active', 'true');
+    });
+	
+	$('.maximize').click(function(e) {
+        e.preventDefault();
+		$(this).parent('div').parent('div').removeClass('minified-sidebar');
+		$(this).parent('div').parent('div').removeClass('minified-sidebar-active');
+		$('.schedule-title').parent('div').addClass('home-body-max').removeClass('home-body-min');
+		$('.maximize').hide();
+		$('.minimize').show();
+		$('.side-name').fadeIn(1000);
+    	$.cookie('sidebar-active', 'false');
+	});
+	
+	$('.panel-schedule-body').click(function(e) {
+        $('.edit-schedule').children('[name="schedule-code"]').attr('value', $(this).children('.schedule-code').text());
+		$('.edit-schedule').children('[name="schedule-name"]').attr('value', $(this).children('.schedule-name').text());
+		$('.edit-schedule').children('[name="schedule-day"]').attr('value', $(this).children('.schedule-day').text());
+		$('.edit-schedule').children('[name="schedule-time"]').attr('value', $(this).children('.schedule-time').text());
+		$('.edit-schedule').children('[name="schedule-faculty"]').children('.option-active')
+			.attr('value', $(this).children('.schedule-faculty').text()).text($(this).children('.schedule-faculty').text());
+    });
+	
+	$('.schedule-delete').click(function(e) {
+        var removeSchedule = confirm('Do you wish to delete?');
+		if(removeSchedule == true) {
+			$('.delete-schedule').children('[name="delete-code"]')
+				.attr('value', $(this).parent('div').siblings('.schedule-code').text());
+			$('.btn-delete-schedule').click();
+		}
+		
+		return false;
+    });
+	
+	$('.register-account').change(function(e) {
+       $('.register-account-submit').click(); 
+    });
+	
+	$('.login-btn-forgot').click(function(e) {
+        e.preventDefault();
+		$('#login-form-head').hide();
+		$('#login-forgot-head').show();
+		$('#login-form').hide();
+		$('#login-forgot-form').show();
+		$('.login-btn-forgot').hide();
+		$('.login-btn-back').show();
+    });
+	
+	$('.login-btn-back').click(function(e) {
+        e.preventDefault();
+		$('#login-forgot-head').hide();
+		$('#login-form-head').show();
+		$('#login-forgot-form').hide();
+		$('#login-form').show();
+		$('.login-btn-back').hide();
+		$('.login-btn-forgot').show();
+    });
+});
+
+$(document).ready(function(e) {
+    $('#slider').cycle({ 
+    	fx:     'fade', 
+    	delay:	-2000 
+	});
+	
+	$('.main').onepage_scroll({
+   		sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
+   		easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in", 
+                                    // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+   		animationTime: 1000,             // AnimationTime let you define how long each section takes to animate
+   		pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.
+   		updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
+   		beforeMove: function(index) {},  // This option accepts a callback function. The function will be called before the page moves.
+   		afterMove: function(index) {},   // This option accepts a callback function. The function will be called after the page moves.
+   		loop: true,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
+   		keyboard: true,                  // You can activate the keyboard controls
+   		responsiveFallback: false        // You can fallback to normal page scroll by defining the width of the browser in which
+                                    // you want the responsive fallback to be triggered. For example, set this to 600 and whenever 
+                                    // the browser's width is less than 600, the fallback will kick in.
+	});
+
+});

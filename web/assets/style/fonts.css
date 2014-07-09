@@ -1,0 +1,20 @@
+@font-face{ 
+	font-family: 'Source-sans';
+	font-style: normal;
+	font-weight: 700;
+	src: url('/assets/fonts/source-sans/SourceSansPro-Bold.otf') format('opentype');
+}
+
+@font-face{ 
+	font-family: 'Source-sans';
+	font-style: normal;
+	font-weight: 400;
+	src: url('/assets/fonts/source-sans/SourceSansPro-Regular.otf') format('opentype');
+}
+
+@font-face{ 
+	font-family: 'Source-sans';
+	font-style: normal;
+	font-weight: 300;
+	src: url('/assets/fonts/source-sans/SourceSansPro-Light.otf') format('opentype');
+}

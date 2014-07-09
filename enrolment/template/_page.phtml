@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="<?php print $class; ?>">
+	
+<head>
+	<title><?php print $title; ?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<?php if(isset($meta) && is_array($meta)): ?>
+    <?php foreach($meta as $name => $content): ?>
+    <meta name="<?php print $name; ?>" content="<?php print $content; ?>" />
+    <?php endforeach; ?>
+    <?php endif; ?>
+	
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/reset.css" />
+    <link rel="shortcut icon" href="/assets/images/COPERS.png" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/bootstrap-select/bootstrap-select.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/fonts.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/onepage-scroll.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/assets/style/base/jquery.ui.all.css" />
+	
+</head>
+
+<body class="loading">
+	<?php if($_SERVER['REQUEST_URI'] == '/'): ?>
+    <div class="main"><?php echo $body;?></div>
+    <?php endif; ?>
+    
+    <div class="page">
+		<div class="head"><?php echo $head; ?></div>
+        <?php if($_SERVER['REQUEST_URI'] != '/'): ?>
+        <div class="body"><?php echo $body;?></div>
+        <?php endif; ?>
+		<div class="foot"><?php echo $foot; ?></div>
+        
+        <script type="text/javascript" src="/assets/scripts/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="/assets/scripts/jquery.cycle.js"></script>
+   		<script type="text/javascript" src="/assets/scripts/jquery.cookie.js"></script>
+		<script type="text/javascript" src="/assets/scripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/assets/style/bootstrap-select/bootstrap-select.js"></script>
+        <script type="text/javascript" src="/assets/scripts/jquery.onepage-scroll.min.js"></script>
+        <script type="text/javascript" src="/assets/scripts/onepage.js"></script>
+		<script type="text/javascript" src="/assets/scripts/ui/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="/assets/scripts/ui/jquery.ui.core.js"></script>
+		<script type="text/javascript" src="/assets/scripts/ui/jquery.ui.widget.js"></script>
+		<script type="text/javascript" src="/assets/scripts/ui/jquery.ui.accordion.js"></script>
+		<script>
+			$(function() {
+			$( "#accordion" ).accordion();
+			});
+		</script>
+			
+        
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+user
+	user_id			auto increment
+	user_name		full name
+	user_email		email@email.com
+	user_password		alphanumeric chars
+	user_gender		male/female
+	user_birthday		date
+	user_phone		alphanumeric (11)
+	user_photo		file position
+	user_type		student/professor/admin
+	user_active		deleted or no
+	user_created		datetime
+	user_updated		datetime
+
+address
+	address_id
+	address_user
+	address_street
+	address_city
+	address_state
+	address_postal
+	address_country
+	address_primary
+
+student
+	student_id
+	student_user
+	student_number
+	student_degree
+	student_college
+	student_FPA
+	student_enrol
+
+professor
+	professor_id
+	professor_user
+
+subject
+	subject_id
+	subject_name
+	subject_code
+	subject_day
+	subject_time
+	subject_faculty
+	subject_active
+
+taken
+	taken_id
+	taken_student
+	taken_subject
+	taken_professor
+	taken_grade
+	taken_active
+	taken_created
+
+assigned
+	assigned_id
+	assigned_professor
+	assigned_subject
+
+request
+	request_id
+	request_approve
+	request_reason
+	request_student
+	request_subject

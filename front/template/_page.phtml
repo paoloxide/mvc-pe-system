@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="<?php print $class; ?>">
+	
+<head>
+	<title><?php print $title; ?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<?php if(isset($meta) && is_array($meta)): ?>
+    <?php foreach($meta as $name => $content): ?>
+    <meta name="<?php print $name; ?>" content="<?php print $content; ?>" />
+    <?php endforeach; ?>
+    <?php endif; ?>
+	
+   <!-- <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/reset.css" /> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/style/style.css" />    
+    <link rel="shortcut icon" href="/assets/images/logo.png" />
+	
+</head>
+
+<body>
+	<div class="page">
+		<div class="head"><?php echo $head; ?></div>
+		<div class="body"><?php echo $body; ?></div>
+		<div class="foot"><?php echo $foot; ?></div>
+        
+        <script type="text/javascript" src="/assets/scripts/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="/assets/scripts/bootstrap.min.js"></script>
+    </div>
+</body>
+</html>
