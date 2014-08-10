@@ -47,10 +47,9 @@ class Enrolment_Page_Reset extends Enrolment_Page {
 			
 			$this->_body['user'] = $user;
 			$this->_body['message'] = 'reset';
-			var_dump($_POST);
 			if(!empty($_POST)) {
 				if($_POST['new-password'] != $_POST['confirm-password']) {
-					$_SESSION['error'] = array('type' => 'alert', 'message' => 'password mismatch');
+					$_SESSION['error'] = array('type' => 'alert', 'message' => 'Password Mismatch');
 					header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 					exit;
 				} else {
