@@ -1,10 +1,21 @@
 $(window).load(function() {
 	$('.selectpicker').selectpicker();
+	$('#myTab a').click(function (e) {
+  		e.preventDefault()
+  		$(this).tab('show')
+	})
+	$('#print-acc').tooltip();
+	$('#create-acc').tooltip();
     // start up after 2sec
     window.setTimeout(function(){
         $('body').removeClass("loading").addClass('loaded');
     }, 800);
 	
+	$('#myTab a[href="#profile"]').tab('show') // Select tab by name
+	$('#myTab a:first').tab('show') // Select first tab
+	$('#myTab a:last').tab('show') // Select last tab
+	$('#myTab li:eq(2) a').tab('show') // Select third tab (0-indexed)
+
 	if($.cookie('sidebar-active') == 'true') {
 		$('.minimize').parent('div').parent('div').addClass('minified-sidebar-active');
 		$('.side-name').hide();

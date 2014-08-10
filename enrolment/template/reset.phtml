@@ -37,6 +37,14 @@
 	padding: 10px;
 	margin: 10px;
 }
+
+.error-message {
+	background: rgba(255,0,0,0.75);
+	color: #FFF;
+	padding: 0;
+	text-align: center;
+	width: 400px;
+}
 </style>
 <section class="section-1">
 	<!--<a href="login"><button class="btn-signin pos">Sign in</button></a>-->
@@ -57,7 +65,11 @@
         	        <input class="form-control padding-m10" name="confirm-password" 
             	    	placeholder="Confirm New Password" type="password" required />
         	    	<input class="btn btn-primary padding-m10" type="submit" value="Confirm" style="width: 400px" />
-        		</form>
+        			<?php if(isset($_SESSION['error'])): ?>
+                    <div class="form-control padding-m10 error-message"><?php echo $_SESSION['error']['message']; ?></div>
+                    <?php unset($_SESSION['error']); ?> 
+					<?php endif; ?>
+                </form>
              <?php elseif($message == 'success'): ?>  
              	<h3>You have successfully changed your password.</h3>
                 <button class="btn btn-primary" style="width:400px"><a href="login">Proceed to Login</a></button>
