@@ -29,13 +29,13 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 			exit;
 		}
 		if(!empty($_POST)) {
-			if($_POST['flag'] == 'add') {
+			if($_POST['post-flag'] == 'add') {
 				if($_POST['user-type'] == 'professor') {
 					echo 'hi';
 				} else {
-					var_dump($_POST['stud-bday']);
+					$newDate = explode('-',$_POST['user-bday']);
 					$date = new DateTime();
-					$date->setDate(1995,8,9);
+					$date->setDate($newDate[0],$newDate[1],$newDate[2]);
 					$name = $_POST['given-name'].' '.$_POST['mid-name'].', '.$_POST['last-name'];
 					$newRow = array('user_name' 	=> $name,
 									'user_email'	=> $_POST['stud-email'],
@@ -55,6 +55,7 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 					$arguments = array('type' => 'student',
 									   'row'  => $newRow);
 					enrolment()->Data()->secureCalling('add', $arguments, 'user');
+					unset($_POST);
 				}
 			}
 		}
