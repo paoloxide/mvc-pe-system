@@ -20,6 +20,9 @@ class Data extends Eden_Class {
 				return $this->getProfessor();
 			}
 			return $this->getData($tableName); 
+		} else if($methodCall == 'update') {
+				$parameter = explode('~', $arguments);
+				return updateTable($tableName, $parameter[0], $parameter[1], $parameter[2]);	
 		}
 	}
 	
@@ -51,8 +54,9 @@ class Data extends Eden_Class {
 					->getRows();
 	}
 	
-	protected function updateTable() {
-		
+	protected function updateTable($tableName = NULL, $callName = NULL, $filter = NULL, $list = NULL) {
+		return $rows = $this->_database
+					->setRow($tableName,$callName,$filter,$list);
 	}
 	
 }

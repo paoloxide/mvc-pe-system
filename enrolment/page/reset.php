@@ -24,8 +24,51 @@ class Enrolment_Page_Reset extends Enrolment_Page {
 	/* Public Methods
 	-------------------------------*/
 	public function render() {
-		var_dump($_GET);
-		exit;
+		
+		if(!isset($_GET['token'], $_GET['email'])){
+			header('Location: http://plmcopers.edu.ph');
+			exit;
+		}
+		
+		if(isset($_GET['token'], $_GET['email'])) {
+			$arguments = 'user_email' . '~' . $_GET['email'];
+			$item = enrolment()->Data()->secureCalling('search', $arguments, 'user');
+			$user=$item[0];
+			if(empty($user)) {// if email is invalid
+				header('Location: http://karrera.ph');
+				exit;
+			}
+			
+			$token = md5($user['user_id'].$user['user_email'].$user['user_password']);
+			if($_GET['token'] != $token) { // if token is invalid
+				$this->_body['message'] = 'error';
+				return $this->_page();
+			}
+			
+			$this->_body['user'] = $user;
+			$this->_body['message'] = 'reset';
+			if(!empty($_POST)) {
+				if($_POST['new-password'] != $_POST['confirm-password']) {
+					$_SESSION['error'] = array('type' => 'alert', 'message' => 'password mismatch');
+					header('Location: http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+					exit;
+				} else {
+					$this->_body['message'] = 'success';
+					//update database
+					$row = array('user_password' => md5($_POST['new-password']));
+					$arguments = 'user_password~'.$user['user_password'].'~'.$row;
+					enrolment()->Data()->secureCalling('update', $arguments, 'user');
+				}
+			}
+			
+		} else if(isset($_GET['token'])) {
+			header('Location: /');
+			exit;
+		} else if(isset($_GET['email'])) {
+			header('Location: /');
+			exit;
+		}
+		
 		return $this->_page();
 	}
 	

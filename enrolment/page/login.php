@@ -44,7 +44,7 @@ class Enrolment_Page_Login extends Enrolment_Page {
 					$smtp = eden('mail')->smtp('smtp.gmail.com', $email, $password, 465, true);
 					
 					$smtp->setSubject('Forgot Password link!')
-						->setBody('Hello '.$user['user_name'].'! To reset your password, please click this '.'<a href="'.$link.'">link</a>')
+						->setBody('Hello '.$user['user_name'].'! To reset your password, please click this link: '.$link)
 						->addTo($user['user_email'])
 						->send();
 				}
