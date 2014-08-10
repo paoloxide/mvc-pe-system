@@ -21,8 +21,9 @@ class Data extends Eden_Class {
 			}
 			return $this->getData($tableName); 
 		} else if($methodCall == 'update') {
-				$parameter = explode('~', $arguments);
-				return $this->updatePassword($tableName, $parameter[0], $parameter[1], $parameter[2]);	
+			return $this->updateTable($tableName, $arguments['colName'], $arguments['filter'], $arguments['list']);	
+		} else if($methodCall == 'add') {
+			$this->addUser($arguments['type'], $arguments['row']);
 		}
 	}
 	
@@ -54,10 +55,24 @@ class Data extends Eden_Class {
 					->getRows();
 	}
 	
-	protected function updatePassword($tableName = NULL, $collName = NULL, $filter = NULL, $list = NULL) {
-		$newRow = array($collName => md5($list));
+	protected function updateTable($tableName = NULL, $colName = NULL, $filter = NULL, $list = NULL) {
 		return $rows = $this->_database
-					->setRow($tableName,$collName,$filter,$newRow);
+					->setRow($tableName,$colName,$filter,$list);
 	}
 	
+	protected function addUser($userType = NULL, $row = NULL){
+		if($userType == 'professor') {
+			$this->_database
+				->model($row)
+				->save('user')
+				->copy('user_id','professor_user')
+				->save('professor');
+		} else {
+			$this->_database
+				->model($row)
+				->save('user')
+				->copy('user_id','student_user')
+				->save('student');
+		}
+	}
 }
