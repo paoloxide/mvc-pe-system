@@ -22,7 +22,7 @@ class Data extends Eden_Class {
 			return $this->getData($tableName); 
 		} else if($methodCall == 'update') {
 				$parameter = explode('~', $arguments);
-				return updateTable($tableName, $parameter[0], $parameter[1], $parameter[2]);	
+				return $this->updatePassword($tableName, $parameter[0], $parameter[1], $parameter[2]);	
 		}
 	}
 	
@@ -54,9 +54,10 @@ class Data extends Eden_Class {
 					->getRows();
 	}
 	
-	protected function updateTable($tableName = NULL, $callName = NULL, $filter = NULL, $list = NULL) {
+	protected function updatePassword($tableName = NULL, $collName = NULL, $filter = NULL, $list = NULL) {
+		$newRow = array($collName => md5($list));
 		return $rows = $this->_database
-					->setRow($tableName,$callName,$filter,$list);
+					->setRow($tableName,$collName,$filter,$newRow);
 	}
 	
 }

@@ -47,6 +47,7 @@ class Enrolment_Page_Reset extends Enrolment_Page {
 			
 			$this->_body['user'] = $user;
 			$this->_body['message'] = 'reset';
+			var_dump($_POST);
 			if(!empty($_POST)) {
 				if($_POST['new-password'] != $_POST['confirm-password']) {
 					$_SESSION['error'] = array('type' => 'alert', 'message' => 'password mismatch');
@@ -56,7 +57,7 @@ class Enrolment_Page_Reset extends Enrolment_Page {
 					$this->_body['message'] = 'success';
 					//update database
 					$row = array('user_password' => md5($_POST['new-password']));
-					$arguments = 'user_password~'.$user['user_password'].'~'.$row;
+					$arguments = 'user_password~'.$user['user_password'].'~'.$_POST['new-password'];
 					enrolment()->Data()->secureCalling('update', $arguments, 'user');
 				}
 			}
