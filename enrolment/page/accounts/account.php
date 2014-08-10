@@ -28,13 +28,12 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 			header('Location: http://plmcopers.edu.ph/welcome');
 			exit;
 		}
-		
-		$_POST[] = 'hi';
 		if(!empty($_POST)) {
 			if($_POST['flag'] == 'add') {
 				if($_POST['user-type'] == 'professor') {
 					echo 'hi';
 				} else {
+					var_dump($_POST['stud-bday']);
 					$date = new DateTime();
 					$date->setDate(1995,8,9);
 					$name = $_POST['given-name'].' '.$_POST['mid-name'].', '.$_POST['last-name'];
