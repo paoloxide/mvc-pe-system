@@ -1,0 +1,72 @@
+<style>
+.gaussian-box {
+	background: rgb(255,255,255); /*IE CODING*/
+	background: rgba(255,255,255, 0.50);
+	background-position: -70px;
+	height: 330px;
+	left: 28%;
+	margin: 0 auto;
+	position:absolute;
+	width: 600px;
+	
+	-webkit-filter: blur(8px);
+  	-moz-filter: blur(8px);
+  	filter: url('/media/blur.svg#blur'); /* for Firefox */
+	
+	z-index: 99;
+}
+
+.g-blur {
+	background: rgb(255,255,255); /*IE CODING*/
+	background: rgba(255,255,255, 0.45);
+	height: 330px;
+	left: 28%;
+	margin: 0 auto;
+	position: absolute;
+	width: 600px;
+	z-index: 100;
+}
+
+.form-gen {
+	height: 400px;
+	margin: 0 auto;
+	width: 400px;
+}
+
+.padding-m10 {
+	padding: 10px;
+	margin: 10px;
+}
+</style>
+<section class="section-1">
+	<!--<a href="login"><button class="btn-signin pos">Sign in</button></a>-->
+    <div style="position:absolute; width:100%">	
+	    <div style="margin: 0 auto; width:359px; margin-top:50px; margin-bottom: 50px">
+            <img src="/assets/images/COPERS-head.png" />        
+		</div>
+        <div class="gaussian-box"></div>
+        <div class="g-blur">
+        	<h1 class="padding-m10" style="text-align:center">Reset Password</h1>
+            <?php if($message == 'error'):?>
+            	<h3>It seems that you have already changed your password.</h3>
+                <button class="btn btn-primary" style="width:400px"><a href="login">Proceed to Login</a></button>
+            <?php elseif($message == 'reset'): ?>
+            	<form class="form-gen" action="reset" method="post">
+	        	    <input class="form-control padding-m10" name="new-password" 
+    	            	placeholder="Enter New Password" type="password" required />
+        	        <input class="form-control padding-m10" name="confirm-password" 
+            	    	placeholder="Confirm New Password" type="password" required />
+        	    	<input class="btn btn-primary padding-m10" type="submit" value="Confirm" style="width: 400px" />
+        		</form>
+             <?php elseif($message == 'success'): ?>  
+             	<h3>You have successfully changed your password.</h3>
+                <button class="btn btn-primary" style="width:400px"><a href="login">Proceed to Login</a></button>
+             <?php endif; ?>
+        </div>
+    </div>    	
+    <div id="wrapper">
+		<div id="container">
+       		<img class="slider-image" src="/assets/images/copers1.jpg" />
+		</div>
+	</div>
+</section>

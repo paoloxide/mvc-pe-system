@@ -66,7 +66,7 @@ abstract class Enrolment_Page extends Eden_Class {
 		$body = enrolment()->trigger('body')->template($page.$this->_template, $this->_body);
 		$foot = enrolment()->trigger('foot')->template($page.'/_foot.phtml', $this->_foot);
 		
-		if($this->_template == '/index.phtml' || $this->_template == '/login.phtml' ) {
+		if($this->_template == '/index.phtml' || $this->_template == '/login.phtml' || $this->_template == '/reset.phtml' ) {
 			$head = NULL;
 			$foot = NULL;
 		}
