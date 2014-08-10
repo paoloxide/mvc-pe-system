@@ -34,6 +34,19 @@ class Enrolment_Page_Login extends Enrolment_Page {
 					$_SESSION['errorMessage'] = $this->_error[0]['message'];
 					header('Location: http://plmcopers.edu.ph/login');
 					exit;
+				} else {
+					$user = $item[0];
+					$email = 'karreraph@gmail.com';
+					$password = 'Karrera07';
+					$token = md5($user['user_id'].$user['user_email'].$user['user_password']);
+					$link = 'http://plmcopers.edu.ph/reset?token='.$token.'&email='.$user['user_email'];
+					
+					$smtp = eden('mail')->smtp('smtp.gmail.com', $email, $password, 465, true);
+					
+					$smtp->setSubject('Forgot Password link!')
+						->setBody('Hello '.$user['user_name'].'! To reset your password, please click this '.'<a href="'.$link.'">link</a>')
+						->addTo($user['user_email'])
+						->send();
 				}
 			} else if($_POST['login-form'] == 'not-forgot') {
 				if(!empty($this->_error)) {
@@ -64,16 +77,26 @@ class Enrolment_Page_Login extends Enrolment_Page {
 	protected function _isError($item) {
 		if(isset($_POST['email'])) {
 			if(!empty($item)) {
-				if($item[0]['user_active'] == 0) {
-					$this->_error[] = array(
-						'type'		=> 'error',
-						'message'	=> 'Account no longer exists'
-					);
-				} else if($item[0]['user_password'] != md5($_POST['password'])) {
-					$this->_error[] = array(
-						'type'		=> 'error',
-						'message'	=> 'Incorrect username or password'
-					);
+				// if the form is login
+				if($_POST['login-form'] != 'forgot'){
+					if($item[0]['user_active'] == 0) {
+						$this->_error[] = array(
+							'type'		=> 'error',
+							'message'	=> 'Account no longer exists'
+						);
+					} else if($item[0]['user_password'] != md5($_POST['password'])) {
+						$this->_error[] = array(
+							'type'		=> 'error',
+							'message'	=> 'Incorrect username or password'
+						);
+					}
+				} else { // if the form is forgot password
+					if($item[0]['user_active'] == 0) {
+						$this->_error[] = array(
+							'type'		=> 'error',
+							'message'	=> 'Account no longer exists'
+						);
+					}
 				}
 			} else {
 				$this->_error[] = array(
