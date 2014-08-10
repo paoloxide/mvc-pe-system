@@ -36,8 +36,8 @@ class Enrolment_Page_Login extends Enrolment_Page {
 					exit;
 				} else {
 					$user = $item[0];
-					$email = 'karreraph@gmail.com';
-					$password = 'Karrera07';
+					$email = 'plmcopers@gmail.com';
+					$password = 'mountaineer!=......';
 					$token = md5($user['user_id'].$user['user_email'].$user['user_password']);
 					$link = 'http://plmcopers.edu.ph/reset?token='.$token.'&email='.$user['user_email'];
 					
