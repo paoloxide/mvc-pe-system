@@ -36,10 +36,13 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 		}
 		if(!empty($_POST)) {
 			if($_POST['post-flag'] == 'add') {
+<<<<<<< HEAD
 				$this->_isError();
 				if(!empty($this->_error)) {
 					return $this->_page();
 				}
+=======
+>>>>>>> dd7ac047d29b2ea1d0c62dd23f457c5b636a7601
 				if($_POST['user-type'] == 'professor') {
 					$name = $_POST['last-name'].', '.$_POST['given-name'].' '.$_POST['mid-name'];
 					$newRow = array('user_name' 	=> $name,
@@ -58,7 +61,14 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 					$this->_error['message'] = 'Professor Successfully Added';
 					$_SESSION['error'] = $this->_error;
 				} else {
+<<<<<<< HEAD
 					$name = $_POST['last-name'].', '.$_POST['given-name'].' '.$_POST['mid-name'];
+=======
+					$newDate = explode('-',$_POST['user-bday']);
+					$date = new DateTime();
+					$date->setDate($newDate[0],$newDate[1],$newDate[2]);
+					$name = $_POST['given-name'].' '.$_POST['mid-name'].', '.$_POST['last-name'];
+>>>>>>> dd7ac047d29b2ea1d0c62dd23f457c5b636a7601
 					$newRow = array('user_name' 	=> $name,
 									'user_email'	=> $_POST['stud-email'],
 									'user_password' => md5($_POST['stud-password']),
@@ -76,9 +86,13 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 					$arguments = array('type' => 'student',
 									   'row'  => $newRow);
 					enrolment()->Data()->secureCalling('add', $arguments, 'user');
+<<<<<<< HEAD
 					$this->_error['type'] = 'success';
 					$this->_error['message'] = 'Student Successfully Added';
 					$_SESSION['error'] = $this->_error;
+=======
+					unset($_POST);
+>>>>>>> dd7ac047d29b2ea1d0c62dd23f457c5b636a7601
 				}
 				unset($_POST);
 			}
