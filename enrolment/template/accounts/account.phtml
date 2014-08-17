@@ -23,27 +23,96 @@
 	</div>
 </div>
 <div class="home-body-max">
-	<span style="margin: 10px 10px 0 0; font-size:36px"><i class="fa fa-gears"></i></span>
-	<p class="schedule-title" style="display: inline">Account Settings</p>
+	<span style="margin: 10px 10px 0 0; font-size:36px;"><i class="fa fa-gears"></i></span>
+	<p class="schedule-title" style="display: inline;">Account Settings</p>
     <div class="schedule-container">
     	<div class="panel panel-default panel-schedule">
-        	<div class="panel-heading container-fluid" style="background: rgba(0,102,255,0.8);">
-	           
-			</div>
-            <ul class="nav nav-tabs" role="tablist" style="background: rgba(153,153,153,0.25);">
+        	<div class="panel-heading container-fluid" style="background: rgba(0,102,255,0.8);"></div>
+            <ul class="nav nav-tabs" role="tablist" style="background: rgba(204,204,204,0.25);">
   				<li class="active"><a href="#student" role="tab" data-toggle="tab">Students</a></li>
   				<li><a href="#professor" role="tab" data-toggle="tab">Professors</a></li>
                 <button id="print-acc" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 
                 	style="float:right; margin: 3px 15px 2px 0;" title="Print Account"><i class="fa fa-print"></i></button>
-                    
-                <button id="create-acc" type="button" class="btn btn-default" data-toggle="modal" data-target="#add-student"data-placement="top" 
-                	style="float:right; margin: 3px 10px 2px 0;" title="Create Account"><i class="fa fa-plus-circle"></i></button>
+
+                <button id="create-acc" type="button" class="btn btn-default" data-toggle="modal" data-target="#add-student"
+                	data-placement="top" style="float:right; margin: 3px 10px 2px 0;" title="Create Account">
+                    	<i class="fa fa-plus-circle"></i></button>
+                
+				<?php if(!empty($_SESSION['error'])): ?>  
+            	    <button class="btn btn-danger" style="float:right; margin: 3px 10px 2px 0;">	
+           				<?php echo $_SESSION['error']['message']; ?>
+                	   	<?php unset($_SESSION['error']); ?>					
+                	</button>
+                <?php endif; ?>
+        </p>
 			</ul>
 
 			<!-- Tab panes -->
 			<div class="tab-content">
-  				<div class="tab-pane fade in active" id="student">A.</div>
-  				<div class="tab-pane fade" id="professor">B.</div>
+  				<div class="tab-pane fade in active" id="student">
+                	<div class="container-fluid" style="background: rgba(0,102,255,0.80); color:#FFF">
+		            	  		<div class="col-md-4 col-body ">STUDENT NAME</div>
+	        	    	   		<div class="col-md-2 col-body ">STUDENT NUMBER</div>
+	    	        	   		<div class="col-md-1 col-body ">YEAR</div>
+	        	    	   		<div class="col-md-1 col-body ">COLLEGE</div>
+	            		   		<div class="col-md-2 col-body ">COURSE</div>
+                                <div class="col-md-1 col-body ">ENROLLED</div>
+            				</div>
+					<?php $flag = 0; foreach($student as $key => $values): ?>
+                		<?php if($flag == 0): $flag++; ?>
+                    	 	<div class="container-fluid" 
+                         		style="background: rgba(0,0,0,0.1)" data-toggle="modal" data-target="">
+		            	  		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-2 col-body "><?php echo $values['student_number'] ?></div>
+	    	        	   		<div class="col-md-1 col-body "><?php echo $values['student_year'] ?></div>
+	        	    	   		<div class="col-md-1 col-body "><?php echo strtoupper($values['student_college']) ?></div>
+	            		   		<div class="col-md-2 col-body "><?php echo $values['student_course'] ?></div>
+                                <div class="col-md-1 col-body "><?php if($values['student_enrol']): echo 'YES'; ?>
+                                	<?php else: echo 'NO'; ?>
+                                    <?php endif; ?></div>
+                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+            				</div>
+                    	<?php elseif($flag == 1): $flag--; ?>
+	                	 	<div class="container-fluid" data-toggle="modal" data-target="">
+		            	 		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-2 col-body "><?php echo $values['student_number'] ?></div>
+	    	        	   		<div class="col-md-1 col-body "><?php echo $values['student_year'] ?></div>
+	        	    	   		<div class="col-md-1 col-body "><?php echo strtoupper($values['student_college']) ?></div>
+	            		   		<div class="col-md-2 col-body "><?php echo $values['student_course'] ?></div>
+                                <div class="col-md-1 col-body "><?php if($values['student_enrol']): echo 'YES'; ?>
+                                	<?php else: echo 'NO'; ?>
+                                    <?php endif; ?></div>
+                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+            				</div>
+                    	<?php endif; ?>
+					<?php endforeach; ?>
+                </div>
+  				<div class="tab-pane fade" id="professor">
+                	<div class="container-fluid" style="background: rgba(0,102,255,0.80); color:#FFF">
+		            	<div class="col-md-4 col-body ">PROFESSOR NAME</div>
+	        	    	<div class="col-md-4 col-body ">EMPLOYEE NUMBER</div>
+	    	        	<div class="col-md-3 col-body ">CONTACT NUMBER</div>
+            		</div>
+					<?php $flag = 0; foreach($professor as $key => $values): ?>
+                		<?php if($flag == 0): $flag++; ?>
+                    	 	<div class="container-fluid" 
+                         		style="background: rgba(0,0,0,0.1)" data-toggle="modal" data-target="">
+		            	  		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-4 col-body "><?php echo $values['professor_number'] ?></div>
+	    	        	   		<div class="col-md-3 col-body "><?php echo $values['user_phone'] ?></div>
+                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+            				</div>
+                    	<?php elseif($flag == 1): $flag--; ?>
+	                	 	<div class="container-fluid" data-toggle="modal" data-target="">
+		            	 		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-4 col-body "><?php echo $values['professor_number'] ?></div>
+	    	        	   		<div class="col-md-3 col-body "><?php echo $values['user_phone'] ?></div>
+                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+            				</div>
+                    	<?php endif; ?>
+					<?php endforeach; ?>                    
+                </div>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -58,49 +127,89 @@
       <div class="modal-header" style="background: rgba(51,204,51,0.7); color: #FFF">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">
-        	<span class="side-header-icon"><i class="fa fa-user fa-4"></i></span>
-			<strong> Create Student Account</strong>
+        	<span class="side-header-icon modal-head-stud"><i class="fa fa-user fa-4" style="margin-right: 10px"></i>
+			<strong> Create Student Account</strong></span>
+            <span class="side-header-icon modal-head-prof" hidden="true"><i class="fa fa-user fa-4" style="margin-right: 10px"></i>
+			<strong> Create Professor Account</strong></span>
         </h4>
       </div>
-      <div class="modal-body"> 
-      	<form class="add-schedule" action="/accounts/account" method="post">
-        	<input name="post-flag" value="add" hidden="true"/>
-        	<p class="edit-title">Given Name:</p>
-        	<input class="form-control edit-input" name="given-name" required="required" type="text" />
-            <p class="edit-title">Middle Name:</p>
-            <input class="form-control edit-input" name="mid-name" required="required" type="text" />
-            <p class="edit-title">Last Name:</p>
-            <input class="form-control edit-input" name="last-name" required="required" type="text"  />
-            <p class="edit-title">Student Number:</p>
-            <input class="form-control edit-input" name="stud-number" required="required" type="number" />
-            <p class="edit-title">Year:</p>
-            <input class="form-control edit-input" name="stud-year" type="number"  />
-            <p class="edit-title">College:</p>
-            <input class="form-control edit-input" name="stud-college" type="text"  />
-            <p class="edit-title">Course:</p>
-            <input class="form-control edit-input" name="stud-course" type="text" />
-            <p class="edit-title">Password:</p>
-            <input class="form-control edit-input" name="stud-password" required="required" type="password" />
-            <p class="edit-title">Confirm Password:</p>
-            <input class="form-control edit-input" name="stud-password2" required="required" type="password" />
-            <p class="edit-title">Email Address:</p>
-            <input class="form-control edit-input" name="stud-email" required="required" type="email" />
-             <p class="edit-title">Gender:</p>
-            <select class="form-control edit-input" name="stud-gender">
-            	<option value="male">Male</option>
-				<option value="female">Female</option>
-            </select>
-            <p class="edit-title">Birthday:</p>
-            <input class="form-control edit-input" name="stud-bday" type="date"  />
-            <p class="edit-title">Phone Number:</p>
-			<input class="form-control edit-input" name="stud-phone" type="text"  />
-			<p class="edit-title">Access Type:</p>
-            <select class="form-control edit-input" name="user-type">
-				<option value="student">Student</option>
-                <option value="professor">Professor</option>
-            </select>
+      <div class="modal-head" style="padding:20px 20px 0 20px">
+      	<p class="edit-title">Access Type:</p>
+        <select class="form-control edit-input acc-type">
+   	    	<option value="default">Choose Type</option>
+			<option value="student">Student</option>
+           	<option value="professor">Professor</option>
+       	</select>
       </div>
-      <div class="modal-footer">
+      <hr />
+      <div class="modal-body modal-student" style="padding-top: 0">
+           	<form class="add-student" action="/accounts/account" method="post">
+	        	<input name="post-flag" value="add" hidden="true"/>
+	            <input name="user-type" value="student" hidden="true"/>
+	        	<p class="edit-title">Given Name:</p>
+	        	<input class="form-control edit-input" name="given-name" required="required" type="text" />
+	            <p class="edit-title">Middle Name:</p>
+	            <input class="form-control edit-input" name="mid-name" required="required" type="text" />
+	            <p class="edit-title">Last Name:</p>
+	            <input class="form-control edit-input" name="last-name" required="required" type="text"  />
+    	        <p class="edit-title">Student Number:</p>
+        	    <input class="form-control edit-input" name="stud-number" required="required" type="number" />
+            	<p class="edit-title">Year:</p>
+            	<input class="form-control edit-input" name="stud-year" type="number"  />
+            	<p class="edit-title">College:</p>
+            	<input class="form-control edit-input" name="stud-college" type="text"  />
+            	<p class="edit-title">Course:</p>
+            	<input class="form-control edit-input" name="stud-course" type="text" />
+            	<p class="edit-title">Password:</p>
+           	 	<input class="form-control edit-input" name="stud-password" required="required" type="password" />
+            	<p class="edit-title">Confirm Password:</p>
+            	<input class="form-control edit-input" name="stud-password2" required="required" type="password" />
+            	<p class="edit-title">Email Address:</p>
+            	<input class="form-control edit-input" name="stud-email" required="required" type="email" />
+            	<hr />
+                <p class="edit-title">Gender:</p>
+            	<select class="form-control edit-input" name="stud-gender">
+                	<option value="">Choose Gender</option>
+            		<option value="male">Male</option>
+					<option value="female">Female</option>
+            	</select>
+            	<p class="edit-title">Phone Number:</p>
+				<input class="form-control edit-input" name="stud-phone" type="text"  />
+	      </div>
+      	<div class="modal-footer stud-footer">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        	<button type="submit" class="btn btn-success">Save</button>
+      	</div>
+      	</form>
+      <div class="modal-body modal-professor" hidden="true" style="padding-top: 0">
+	      <form class="add-professor" action="/accounts/account" method="post">
+    	    	<input name="post-flag" value="add" hidden="true"/>
+        	    <input name="user-type" value="professor" hidden="true"/>
+        		<p class="edit-title">Given Name:</p>
+   	     		<input class="form-control edit-input" name="given-name" required="required" type="text" />
+            	<p class="edit-title">Middle Name:</p>
+            	<input class="form-control edit-input" name="mid-name" required="required" type="text" />
+            	<p class="edit-title">Last Name:</p>
+            	<input class="form-control edit-input" name="last-name" required="required" type="text"  />
+            	<p class="edit-title">Employee Number:</p>
+            	<input class="form-control edit-input" name="prof-number" required="required" type="number" />
+            	<p class="edit-title">Password:</p>
+            	<input class="form-control edit-input" name="prof-password" required="required" type="password" />
+            	<p class="edit-title">Confirm Password:</p>
+            	<input class="form-control edit-input" name="prof-password2" required="required" type="password" />
+            	<p class="edit-title">Email Address:</p>
+            	<input class="form-control edit-input" name="prof-email" required="required" type="email" />
+                <hr />
+            	 <p class="edit-title">Gender:</p>
+            	<select class="form-control edit-input" name="prof-gender">
+            		<option value="">Choose Gender</option>
+                    <option value="male">Male</option>
+					<option value="female">Female</option>
+            	</select>
+            	<p class="edit-title">Phone Number:</p>
+				<input class="form-control edit-input" name="prof-phone" type="text"  />	
+      </div>	
+      <div class="modal-footer prof-footer" hidden="true">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-success">Save</button>
       </div>
@@ -108,7 +217,6 @@
     </div>
   </div>
 </div>
-
 
 <!--EDIT PROFESSOR ACCOUNT MODAL -->
 

@@ -6,6 +6,7 @@ $(window).load(function() {
 	})
 	$('#print-acc').tooltip();
 	$('#create-acc').tooltip();
+	$('#search-btn').tooltip();
     // start up after 2sec
     window.setTimeout(function(){
         $('body').removeClass("loading").addClass('loaded');
@@ -102,6 +103,24 @@ $(window).load(function() {
 		$('#login-form').show();
 		$('.login-btn-back').hide();
 		$('.login-btn-forgot').show();
+    });
+	
+	$('.acc-type').change(function(e) {
+        if($('.acc-type').val() == 'student') {
+			$('.modal-head-prof').hide();
+			$('.modal-professor').hide();
+			$('.prof-footer').hide();
+			$('.modal-student').show();
+			$('.stud-footer').show();
+			$('.modal-head-stud').show();
+		} else if($('.acc-type').val() == 'professor') {
+			$('.modal-student').hide();
+			$('.stud-footer').hide();
+			$('.modal-head-stud').hide();
+			$('.modal-head-prof').show();
+			$('.modal-professor').show();
+			$('.prof-footer').show();
+		}
     });
 });
 

@@ -60,7 +60,6 @@ abstract class Enrolment_Page extends Eden_Class {
 	-------------------------------*/
 	protected function _page() {
 		$this->_head['page'] = $this->_class;
-	
 		$page = enrolment()->path('template');
 		$head = enrolment()->trigger('head')->template($page.'/_head.phtml', $this->_head);
 		$body = enrolment()->trigger('body')->template($page.$this->_template, $this->_body);

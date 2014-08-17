@@ -25,12 +25,16 @@
 <div class="home-body-max">
 	<span style="margin: 10px 10px 0 0; font-size:36px"><i class="fa fa-book"></i></span>
 	<p class="schedule-title" style="display: inline">Schedules</p>
-    <button class="btn btn-success" data-toggle="modal" data-target="#add-schedule" style="display: inline; float:right; margin: 10px 25px 0 0;"><i class="fa fa-plus-circle" style="margin-right: 5px"></i>Add Schedule</button>
-    <?php if(!empty($schedule)): ?>
-    	<button class="btn btn-success" style="display: inline; float:right; margin: 10px 25px 0 0;"><i class="fa fa-print" style="margin-right: 5px"></i>Print Schedule</button>
-	<?php endif; ?>
+     
     <div class="schedule-container">
     	<div class="panel panel-default panel-schedule">
+         <?php if(!empty($schedule)): ?>
+	         <button id="print-acc" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 
+             	style="float:right; margin: 6px 15px 0 0;" title="Print Schedule"><i class="fa fa-print"></i></button>
+		<?php endif; ?>
+    	     <button id="create-acc" type="button" class="btn btn-default" data-toggle="modal" data-target="#add-schedule"
+             	data-placement="top" style="float:right; margin: 6px 10px 0 0;" title="Add Schedule">
+                    	<i class="fa fa-plus-circle"></i></button>
         	<div class="panel-heading container-fluid" style="background: rgba(0,102,255,0.8);">
 	            <div class="col-md-1 col-heading">CODE</div>
 	            <div class="col-md-3 col-heading">SUBJECT</div>
@@ -78,8 +82,8 @@
         </h4>
       </div>
       <div class="modal-body"> 
-      	<form action="../schedule" method="post">
-        	<input name="function-flag" value="add-schedule" hidden="true"/>
+      	<form action="/admin/schedule" method="post">
+        	<input name="post-flag" value="add" hidden="true"/>
         	<p class="edit-title">Subject Code:</p>
         	<input class="form-control edit-input" name="add-schedule-code" required="required" />
             <p class="edit-title">Subject Name:</p>
@@ -94,7 +98,6 @@
                 	<option value="<?php echo $values['professor_id']; ?>"><?php echo $values['user_name']; ?></option>
                 <?php endforeach; ?>
             </select>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -119,8 +122,8 @@
         </h4>
       </div>
       <div class="modal-body"> 
-      	<form class="edit-schedule" action="../schedule" method="post">
-        	<input name="function-flag" value="edit-schedule" hidden="true"/>
+      	<form class="edit-schedule" action="/admin/schedule" method="post">
+        	<input name="post-flag" value="edit" hidden="true"/>
         	<p class="edit-title">Subject Code:</p>
         	<input class="form-control edit-input" name="schedule-code" required="required" />
             <p class="edit-title">Subject Name:</p>
@@ -136,7 +139,6 @@
                 	<option value="<?php echo $values['professor_id']; ?>"><?php echo $values['user_name']; ?></option>
                 <?php endforeach; ?>
             </select>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -150,7 +152,7 @@
 <!--DELETE FORM -->
 
 <form class="delete-schedule" action="../schedule" method="post" hidden="true">
-	<input name="function-flag" value="delete-schedule"/>
+	<input name="post-flag" value="delete-schedule"/>
     <input name="delete-code" />
     <input class="btn-delete-schedule" type="submit" />
 </form>

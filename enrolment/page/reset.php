@@ -16,7 +16,7 @@ class Enrolment_Page_Reset extends Enrolment_Page {
 	protected $_title = 'COPERS | Reset Password';
 	protected $_class = 'home';
 	protected $_template = '/reset.phtml';
-	protected $_error = array();
+	
 	/* Private Properties
 	-------------------------------*/
 	/* Magic
