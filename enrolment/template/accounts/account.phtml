@@ -1,19 +1,20 @@
 <div class="sidebar">
     <div class="sidebar-link">
     	<a href="/admin/schedule"><div><p><i class="fa fa-book side-header-icon"></i><span class="side-name">Schedules
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></span></p></div></a>
     	<a href="/admin/list"><div><p><i class="fa fa-folder-open-o side-header-icon"></i><span class="side-name">Class Lists
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/students"><div><p><i class="fa fa-users side-header-icon"></i><span class="side-name">Students
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/professors"><div><p><i class="fa fa-bank side-header-icon"></i><span class="side-name">Professors
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/grade"><div><p><i class="fa fa-bar-chart-o side-header-icon"></i><span class="side-name">Report of Grades
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/request"><div><p><i class="fa fa-mail-forward side-header-icon"></i><span class="side-name">Transfer Requests
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/accounts/account"><div style="border-bottom: 1px solid rgba(256, 256, 256, 0.6);"><p>
-        	<i class="fa fa-gears side-header-icon"></i><span class="side-name">Account Settings</span></p></div></a>
+        	<i class="fa fa-gears side-header-icon"></i><span class="side-name">Account Settings
+            <span class="arrow-right" hidden="true"></span></p></div></a>
     </div>
     <div class="sidebar-show">
     	<span class="minimize"><i class="fa fa-arrow-circle-left side-btn"></i></span>
@@ -60,29 +61,30 @@
             				</div>
 					<?php $flag = 0; foreach($student as $key => $values): ?>
                 		<?php if($flag == 0): $flag++; ?>
-                    	 	<div class="container-fluid" 
+                        	<!-- sa (student account) -->
+                    	 	<div class="panel-student-account container-fluid" 
                          		style="background: rgba(0,0,0,0.1)" data-toggle="modal" data-target="">
-		            	  		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
-	        	    	   		<div class="col-md-2 col-body "><?php echo $values['student_number'] ?></div>
-	    	        	   		<div class="col-md-1 col-body "><?php echo $values['student_year'] ?></div>
-	        	    	   		<div class="col-md-1 col-body "><?php echo strtoupper($values['student_college']) ?></div>
-	            		   		<div class="col-md-2 col-body "><?php echo $values['student_course'] ?></div>
-                                <div class="col-md-1 col-body "><?php if($values['student_enrol']): echo 'YES'; ?>
+		            	  		<div class="col-md-4 col-body sa-name "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-2 col-body sa-number "><?php echo $values['student_number'] ?></div>
+	    	        	   		<div class="col-md-1 col-body sa-year "><?php echo $values['student_year'] ?></div>
+	        	    	   		<div class="col-md-1 col-body sa-college "><?php echo strtoupper($values['student_college']) ?></div>
+	            		   		<div class="col-md-2 col-body sa-course "><?php echo $values['student_course'] ?></div>
+                                <div class="col-md-1 col-body sa-enrol "><?php if($values['student_enrol']): echo 'YES'; ?>
                                 	<?php else: echo 'NO'; ?>
                                     <?php endif; ?></div>
-                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+                           		<div class="col-md-1 col-body sa-close"><span class="">&times;</span></div>
             				</div>
                     	<?php elseif($flag == 1): $flag--; ?>
-	                	 	<div class="container-fluid" data-toggle="modal" data-target="">
-		            	 		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
-	        	    	   		<div class="col-md-2 col-body "><?php echo $values['student_number'] ?></div>
-	    	        	   		<div class="col-md-1 col-body "><?php echo $values['student_year'] ?></div>
-	        	    	   		<div class="col-md-1 col-body "><?php echo strtoupper($values['student_college']) ?></div>
-	            		   		<div class="col-md-2 col-body "><?php echo $values['student_course'] ?></div>
-                                <div class="col-md-1 col-body "><?php if($values['student_enrol']): echo 'YES'; ?>
+	                	 	<div class="panel-student-account container-fluid" data-toggle="modal" data-target="">
+		            	 		<div class="col-md-4 col-body sa-name "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-2 col-body sa-number "><?php echo $values['student_number'] ?></div>
+	    	        	   		<div class="col-md-1 col-body sa-year "><?php echo $values['student_year'] ?></div>
+	        	    	   		<div class="col-md-1 col-body sa-college "><?php echo strtoupper($values['student_college']) ?></div>
+	            		   		<div class="col-md-2 col-body sa-course "><?php echo $values['student_course'] ?></div>
+                                <div class="col-md-1 col-body sa-enrol "><?php if($values['student_enrol']): echo 'YES'; ?>
                                 	<?php else: echo 'NO'; ?>
                                     <?php endif; ?></div>
-                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+                           		<div class="col-md-1 col-body sa-close"><span class="">&times;</span></div>
             				</div>
                     	<?php endif; ?>
 					<?php endforeach; ?>
@@ -95,19 +97,19 @@
             		</div>
 					<?php $flag = 0; foreach($professor as $key => $values): ?>
                 		<?php if($flag == 0): $flag++; ?>
-                    	 	<div class="container-fluid" 
+                    	 	<div class="panel-prof-account container-fluid" 
                          		style="background: rgba(0,0,0,0.1)" data-toggle="modal" data-target="">
-		            	  		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
-	        	    	   		<div class="col-md-4 col-body "><?php echo $values['professor_number'] ?></div>
-	    	        	   		<div class="col-md-3 col-body "><?php echo $values['user_phone'] ?></div>
-                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+		            	  		<div class="col-md-4 col-body pa-name "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-4 col-body pa-number "><?php echo $values['professor_number'] ?></div>
+	    	        	   		<div class="col-md-3 col-body pa-phone "><?php echo $values['user_phone'] ?></div>
+                           		<div class="col-md-1 col-body pa-close "><span class="">&times;</span></div>
             				</div>
                     	<?php elseif($flag == 1): $flag--; ?>
-	                	 	<div class="container-fluid" data-toggle="modal" data-target="">
-		            	 		<div class="col-md-4 col-body "><?php echo $values['user_name'] ?></div>
-	        	    	   		<div class="col-md-4 col-body "><?php echo $values['professor_number'] ?></div>
-	    	        	   		<div class="col-md-3 col-body "><?php echo $values['user_phone'] ?></div>
-                           		<div class="col-md-1 col-body close"><span class="">&times;</span></div>
+	                	 	<div class="panel-prof-account container-fluid" data-toggle="modal" data-target="">
+		            	 		<div class="col-md-4 col-body pa-name "><?php echo $values['user_name'] ?></div>
+	        	    	   		<div class="col-md-4 col-body pa-number "><?php echo $values['professor_number'] ?></div>
+	    	        	   		<div class="col-md-3 col-body pa-phone "><?php echo $values['user_phone'] ?></div>
+                           		<div class="col-md-1 col-body pa-close"><span class="">&times;</span></div>
             				</div>
                     	<?php endif; ?>
 					<?php endforeach; ?>                    
@@ -231,25 +233,33 @@
         </h4>
       </div>
       <div class="modal-body"> 
-      	<form class="edit-schedule" action="../schedule" method="post">
-        	<input name="function-flag" value="edit-schedule" hidden="true"/>
-        	<p class="edit-title">Full Name:</p>
-        	<input class="form-control edit-input" name="fname" required="required" />
-            <p class="edit-title">PLM ID:</p>
-            <input class="form-control edit-input" name="plmid" required="required" />
-            <p class="edit-title">Username:</p>
-            <input class="form-control edit-input" name="username" required="required"  />
-            <p class="edit-title">Password:</p>
-            <input class="form-control edit-input" name="password" required="required"  />
-            <p class="edit-title">Re-enter Password:</p>
-			<input class="form-control edit-input" name="repassword" required="required"  />
-			<p class="edit-title">Access Type:</p>
-            <select class="form-control edit-input" name="accesstype">
-            	<option>Professor</option>
-				<option>Admin</option>
-            </select>
-        </form>
-      </div>
+      	<form class="edit-pa" action="../schedule" method="post">
+        	<input name="post-flag" value="edit" hidden="true"/>
+        	<input name="user-type" value="professor" hidden="true"/>
+        		<p class="edit-title">Given Name:</p>
+   	     		<input class="form-control edit-input" name="given-name" required="required" type="text" />
+            	<p class="edit-title">Middle Name:</p>
+            	<input class="form-control edit-input" name="mid-name" required="required" type="text" />
+            	<p class="edit-title">Last Name:</p>
+            	<input class="form-control edit-input" name="last-name" required="required" type="text"  />
+            	<p class="edit-title">Employee Number:</p>
+            	<input class="form-control edit-input" name="prof-number" required="required" type="number" />
+            	<p class="edit-title">Password:</p>
+            	<input class="form-control edit-input" name="prof-password" required="required" type="password" />
+            	<p class="edit-title">Confirm Password:</p>
+            	<input class="form-control edit-input" name="prof-password2" required="required" type="password" />
+            	<p class="edit-title">Email Address:</p>
+            	<input class="form-control edit-input" name="prof-email" required="required" type="email" />
+                <hr />
+            	 <p class="edit-title">Gender:</p>
+            	<select class="form-control edit-input" name="prof-gender">
+            		<option value="">Choose Gender</option>
+                    <option value="male">Male</option>
+					<option value="female">Female</option>
+            	</select>
+            	<p class="edit-title">Phone Number:</p>
+				<input class="form-control edit-input" name="prof-phone" type="text"  />	
+      </div>	
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-success">Save</button>
@@ -272,35 +282,43 @@
         </h4>
       </div>
       <div class="modal-body"> 
-      	<form class="edit-schedule" action="../schedule" method="post">
-        	<input name="function-flag" value="edit-schedule" hidden="true"/>
-        	<p class="edit-title">First Name:</p>
-        	<input class="form-control edit-input" name="fname" required="required" />
-			<p class="edit-title">Middle Name:</p>
-        	<input class="form-control edit-input" name="fname" required="required" />
-			<p class="edit-title">Last Name:</p>
-        	<input class="form-control edit-input" name="fname" required="required" />
-            <p class="edit-title">Student Number:</p>
-            <input class="form-control edit-input" name="plmid" required="required" />
-            <p class="edit-title">Username:</p>
-            <input class="form-control edit-input" name="username" required="required"  />
-            <p class="edit-title">Password:</p>
-            <input class="form-control edit-input" name="password" required="required"  />
-            <p class="edit-title">Re-enter Password:</p>
-			<input class="form-control edit-input" name="repassword" required="required"  />
-			<p class="edit-title">Year:</p>
-            <input class="form-control edit-input" name="password" required="required"  />
-			<p class="edit-title">College:</p>
-            <select class="form-control edit-input" name="accesstype">
-            	<option>CAE</option>
-				<option>CET</option>
-            </select>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-success">Save</button>
-      </div>
+      	<form class="edit-sa" action="../schedule" method="post">
+        	<input name="post-flag" value="edit" hidden="true"/>
+	        <input name="user-type" value="student" hidden="true"/>
+	        	<p class="edit-title">Given Name:</p>
+	        	<input class="form-control edit-input" name="given-name" required="required" type="text" />
+	            <p class="edit-title">Middle Name:</p>
+	            <input class="form-control edit-input" name="mid-name" required="required" type="text" />
+	            <p class="edit-title">Last Name:</p>
+	            <input class="form-control edit-input" name="last-name" required="required" type="text"  />
+    	        <p class="edit-title">Student Number:</p>
+        	    <input class="form-control edit-input" name="stud-number" required="required" type="number" />
+            	<p class="edit-title">Year:</p>
+            	<input class="form-control edit-input" name="stud-year" type="number"  />
+            	<p class="edit-title">College:</p>
+            	<input class="form-control edit-input" name="stud-college" type="text"  />
+            	<p class="edit-title">Course:</p>
+            	<input class="form-control edit-input" name="stud-course" type="text" />
+            	<p class="edit-title">Password:</p>
+           	 	<input class="form-control edit-input" name="stud-password" required="required" type="password" />
+            	<p class="edit-title">Confirm Password:</p>
+            	<input class="form-control edit-input" name="stud-password2" required="required" type="password" />
+            	<p class="edit-title">Email Address:</p>
+            	<input class="form-control edit-input" name="stud-email" required="required" type="email" />
+            	<hr />
+                <p class="edit-title">Gender:</p>
+            	<select class="form-control edit-input" name="stud-gender">
+                	<option value="">Choose Gender</option>
+            		<option value="male">Male</option>
+					<option value="female">Female</option>
+            	</select>
+            	<p class="edit-title">Phone Number:</p>
+				<input class="form-control edit-input" name="stud-phone" type="text"  />
+	      </div>
+      	<div class="modal-footer stud-footer">
+        	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        	<button type="submit" class="btn btn-success">Save</button>
+      	</div>
       </form>
     </div>
   </div>

@@ -88,7 +88,6 @@ class Enrolment_Page_Accounts_Account extends Enrolment_Page {
 		}		
 		return $this->_page();
 	}
-	
 	/* Protected Methods
 	-------------------------------*/
 	protected function _isError() {

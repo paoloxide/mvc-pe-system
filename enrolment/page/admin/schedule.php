@@ -43,17 +43,24 @@ class Enrolment_Page_Admin_Schedule extends Enrolment_Page {
 				$arguments = array('type' => 'subject', 'row'  => $newRow);
 				enrolment()->Data()->secureCalling('add', $arguments, 'user');
 			} else if($_POST['post-flag'] == 'edit') {
-				$faculty = 'user_name' . '~' . $_POST['schedule-faculty'];
-				$data = enrolment()->Data()->secureCalling('search', $faculty, 'user');
+				$oldSubject = $_POST['schedule-id'];
+				$faculty = 'professor_id' . '~' . $_POST['schedule-faculty'];
+				$data = enrolment()->Data()->secureCalling('search', $faculty, 'professor');
 				$newRow = array('subject_code'		=> $_POST['schedule-code'],
 								'subject_name'		=> $_POST['schedule-name'],
 								'subject_day'		=> $_POST['schedule-day'],
 								'subject_time'		=> $_POST['schedule-time'],
-								'subject_professor'	=> $data[0]['user_id'],
+								'subject_professor'	=> $data[0]['professor_id'],
 								'subject_active'  	=> 1,
 								'subject_enrolees'	=> 0);
-				$arguments = array('colName' => 'subject_code', 'filter' => $newRow['subject_code'], 'list' => $newRow);
+				$arguments = array('colName' => 'subject_id', 'filter' => $oldSubject, 'list' => $newRow);
 				enrolment()->Data()->secureCalling('update', $arguments, 'subject');
+			} else if($_POST['post-flag'] == 'delete') {
+				$database = eden('mysql', 'localhost', 'enrolment', 'root', 'developer!');
+				$query = "UPDATE subject SET subject_active = 0 WHERE subject_id = :subject_id";
+				$value = $_POST['delete-id'];
+				$bind = array(':subject_id' => $value);
+				$rows = $database->query($query, $bind);
 			}
 			unset($_POST);
 		}

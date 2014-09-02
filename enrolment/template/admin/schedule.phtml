@@ -1,19 +1,20 @@
 <div class="sidebar">
     <div class="sidebar-link">
     	<a href="/admin/schedule"><div><p><i class="fa fa-book side-header-icon"></i><span class="side-name">Schedules
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/list"><div><p><i class="fa fa-folder-open-o side-header-icon"></i><span class="side-name">Class Lists
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/students"><div><p><i class="fa fa-users side-header-icon"></i><span class="side-name">Students
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/professors"><div><p><i class="fa fa-bank side-header-icon"></i><span class="side-name">Professors
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/grade"><div><p><i class="fa fa-bar-chart-o side-header-icon"></i><span class="side-name">Report of Grades
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/admin/request"><div><p><i class="fa fa-mail-forward side-header-icon"></i><span class="side-name">Transfer Requests
-        	</span></p></div></a>
+        	<span class="arrow-right" hidden="true"></span></p></div></a>
     	<a href="/accounts/account"><div style="border-bottom: 1px solid rgba(256, 256, 256, 0.6);"><p>
-        	<i class="fa fa-gears side-header-icon"></i><span class="side-name">Account Settings</span></p></div></a>
+        	<i class="fa fa-gears side-header-icon"></i><span class="side-name">Account Settings
+            <span class="arrow-right" hidden="true"></span></p></div></a>
     </div>
     <div class="sidebar-show">
     	<span class="minimize"><i class="fa fa-arrow-circle-left side-btn"></i></span>
@@ -26,8 +27,15 @@
 	<span style="margin: 10px 10px 0 0; font-size:36px"><i class="fa fa-book"></i></span>
 	<p class="schedule-title" style="display: inline">Schedules</p>
      
+     <!--POP OVER TITLE (GENERAL) -->
+     <div class="popover-title" style="display:none">Tip <span style="color:#F00"><i class='fa fa-exclamation-circle'>
+     	</i></span></div>
+         
+     <!--POP OVER MESSAGE (GENERAL) -->
+     <div class="popover-message" style="display:none">Edit and Save revisions to subject information by clicking them!</div>   
+     
     <div class="schedule-container">
-    	<div class="panel panel-default panel-schedule">
+    	<div class="panel panel-default panel-schedule" data-toggle="popover" data-placement="top" data-trigger="hover">
          <?php if(!empty($schedule)): ?>
 	         <button id="print-acc" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" 
              	style="float:right; margin: 6px 15px 0 0;" title="Print Schedule"><i class="fa fa-print"></i></button>
@@ -43,24 +51,28 @@
 	            <div class="col-md-2 col-heading">FACULTY</div>
 			</div>
 				<?php $flag = 0; foreach($schedule as $key => $values): ?>
-                	<?php if($flag == 0): $flag++; ?>
+                	<?php if(($flag == 0) && ($values['subject_active'] != 0)): $flag++; ?>
                     	 <div class="panel-schedule-body container-fluid" 
                          	style="background: rgba(0,0,0,0.1)" data-toggle="modal" data-target="#edit-schedule">
-		            	   <div class="col-md-1 subject-code col-body schedule-code"><?php echo $values['subject_code'] ?></div>
+                           <div class="col-md-1 col-body schedule-id"><?php echo $values['subject_id'] ?></div>
+		            	   <div class="col-md-1 col-body schedule-code"><?php echo $values['subject_code'] ?></div>
 	        	    	   <div class="col-md-3 col-body schedule-name"><?php echo $values['subject_name'] ?></div>
 	    	        	   <div class="col-md-2 col-body schedule-day"><?php echo ucfirst($values['subject_day']) ?></div>
 	        	    	   <div class="col-md-3 col-body schedule-time"><?php echo $values['subject_time'] ?></div>
 	            		   <div class="col-md-2 col-body schedule-faculty"><?php echo $values['user_name'] ?></div>
-                           <div class="col-md-1 col-body close"><span class="schedule-delete">&times;</span></div>
+                           <div class="col-md-1 col-body close"><span class="schedule-delete" data-toggle="tooltip" 
+                           		data-placement="right" title="Delete">&times;</span></div>
             			</div>
-                    <?php elseif($flag == 1): $flag--; ?>
+                    <?php elseif(($flag == 1) && ($values['subject_active'] != 0)): $flag--; ?>
 	                	 <div class="panel-schedule-body container-fluid" data-toggle="modal" data-target="#edit-schedule">
-		            	   <div class="col-md-1 subject-code col-body schedule-code"><?php echo $values['subject_code'] ?></div>
+                           <div class="col-md-1 col-body schedule-id"><?php echo $values['subject_id'] ?></div>
+		            	   <div class="col-md-1 col-body schedule-code"><?php echo $values['subject_code'] ?></div>
 	        	    	   <div class="col-md-3 col-body schedule-name"><?php echo $values['subject_name'] ?></div>
 	    	        	   <div class="col-md-2 col-body schedule-day"><?php echo ucfirst($values['subject_day']) ?></div>
 	        	    	   <div class="col-md-3 col-body schedule-time"><?php echo $values['subject_time'] ?></div>
 	            		   <div class="col-md-2 col-body schedule-faculty"><?php echo $values['user_name'] ?></div>
-                           <div class="col-md-1 col-body close"><span class="schedule-delete">&times;</span></div>
+                           <div class="col-md-1 col-body close"><span class="schedule-delete" data-toggle="tooltip" 
+                           		data-placement="right" title="Delete">&times;</span></div>
             			</div>
                     <?php endif; ?>
 				<?php endforeach; ?>
@@ -108,7 +120,6 @@
   </div>
 </div>
 
-
 <!--EDIT SCHEDULE MODAL -->
 
 <div class="modal fade" id="edit-schedule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -123,7 +134,8 @@
       </div>
       <div class="modal-body"> 
       	<form class="edit-schedule" action="/admin/schedule" method="post">
-        	<input name="post-flag" value="edit" hidden="true"/>
+        	<input name="post-flag" value="edit" hidden="true" />
+            <input name="schedule-id" hidden="true" />
         	<p class="edit-title">Subject Code:</p>
         	<input class="form-control edit-input" name="schedule-code" required="required" />
             <p class="edit-title">Subject Name:</p>
@@ -149,10 +161,15 @@
   </div>
 </div>
 
-<!--DELETE FORM -->
+<!--DELETE SCHEDULE MODAL -->
 
-<form class="delete-schedule" action="../schedule" method="post" hidden="true">
-	<input name="post-flag" value="delete-schedule"/>
+<form class="delete-schedule" action="/admin/schedule" method="post" hidden="true">
+	<input name="post-flag" value="delete" hidden="true"/>
+	<input name="delete-id" />
     <input name="delete-code" />
-    <input class="btn-delete-schedule" type="submit" />
+    <input name="delete-subject" />
+    <input name="delete-day" />
+    <input name="delete-time" />
+    <input name="delete-faculty" />
+    <input type="submit" class="btn-delete-schedule" />
 </form>

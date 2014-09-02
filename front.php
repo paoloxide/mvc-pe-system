@@ -1,8 +1,7 @@
 <?php //-->
 /*
  * This file is part a custom application package.
- */
- 
+ */ 
 require_once dirname(__FILE__).'/eden.php';
 
 /**

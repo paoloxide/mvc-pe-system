@@ -28,6 +28,12 @@ class Enrolment_Page_Admin_List extends Enrolment_Page {
 			header('Location: http://plmcopers.edu.ph/welcome');
 			exit;
 		}
+		
+		$subject = enrolment()->Data()->secureCalling('gather', NULL, 'subject');
+		$professor = enrolment()->Data()->secureCalling('gather', NULL, 'professor');
+		$this->_body['schedule'] = $subject;
+		$this->_body['instructor'] = $professor;
+		
 		return $this->_page();
 	}
 	

@@ -1,4 +1,10 @@
-$(window).load(function() {
+$(window).load(function() {	
+	// start up after 2sec
+    window.setTimeout(function(){
+        $('body').removeClass('loading').addClass('loaded');
+		$('.home-body-max').fadeTo(800, 1);
+    }, 800);
+
 	$('.selectpicker').selectpicker();
 	$('#myTab a').click(function (e) {
   		e.preventDefault()
@@ -7,11 +13,17 @@ $(window).load(function() {
 	$('#print-acc').tooltip();
 	$('#create-acc').tooltip();
 	$('#search-btn').tooltip();
-    // start up after 2sec
-    window.setTimeout(function(){
-        $('body').removeClass("loading").addClass('loaded');
-    }, 800);
-	
+	$('.schedule-delete').tooltip();
+	$('.panel-schedule').popover({
+		html: true,
+		title: function() {
+			return $('.popover-title').html();
+		},
+		content: function() {
+			return $('.popover-message').html();
+		}
+	});
+    
 	$('#myTab a[href="#profile"]').tab('show') // Select tab by name
 	$('#myTab a:first').tab('show') // Select first tab
 	$('#myTab a:last').tab('show') // Select last tab
@@ -37,6 +49,7 @@ $(window).load(function() {
 	$('.sidebar-link').children('a').each(function() {
 		if(href == $(this).attr('href')) {
 			$(this).children('div').addClass('current-sidebar');
+			$(this).children('div').children('p').children('span').children('.arrow-right').show();
 		}
     });
 	
@@ -52,16 +65,17 @@ $(window).load(function() {
 	
 	$('.maximize').click(function(e) {
         e.preventDefault();
+		$('.schedule-title').parent('div').addClass('home-body-max').removeClass('home-body-min');
 		$(this).parent('div').parent('div').removeClass('minified-sidebar');
 		$(this).parent('div').parent('div').removeClass('minified-sidebar-active');
-		$('.schedule-title').parent('div').addClass('home-body-max').removeClass('home-body-min');
 		$('.maximize').hide();
 		$('.minimize').show();
-		$('.side-name').fadeIn(1000);
+		$('.side-name').show();
     	$.cookie('sidebar-active', 'false');
 	});
 	
 	$('.panel-schedule-body').click(function(e) {
+		$('.edit-schedule').children('[name="schedule-id"]').attr('value', $(this).children('.schedule-id').text());
         $('.edit-schedule').children('[name="schedule-code"]').attr('value', $(this).children('.schedule-code').text());
 		$('.edit-schedule').children('[name="schedule-name"]').attr('value', $(this).children('.schedule-name').text());
 		$('.edit-schedule').children('[name="schedule-day"]').attr('value', $(this).children('.schedule-day').text());
@@ -73,12 +87,33 @@ $(window).load(function() {
 	$('.schedule-delete').click(function(e) {
         var removeSchedule = confirm('Do you wish to delete?');
 		if(removeSchedule == true) {
+			$('.delete-schedule').children('[name="delete-id"]')
+				.attr('value', $(this).parent('div').siblings('.schedule-id').text());
 			$('.delete-schedule').children('[name="delete-code"]')
 				.attr('value', $(this).parent('div').siblings('.schedule-code').text());
+			$('.delete-schedule').children('[name="delete-subject"]')
+				.attr('value', $(this).parent('div').siblings('.schedule-name').text());
+			$('.delete-schedule').children('[name="delete-day"]')
+				.attr('value', $(this).parent('div').siblings('.schedule-day').text());
+			$('.delete-schedule').children('[name="delete-time"]')
+				.attr('value', $(this).parent('div').siblings('.schedule-time').text());
+			$('.delete-schedule').children('[name="delete-faculty"]')
+				.attr('value', $(this).parent('div').siblings('.schedule-faculty').text());
 			$('.btn-delete-schedule').click();
 		}
 		
 		return false;
+    });
+	
+	$('.panel-student-account').click(function(e) {
+		var name = $(this).children('.sa-name').text();
+		var arrname = name.split(',');
+        $('.edit-sa').children('[name="sa-"]').attr('value', $(this).children('.sa-name').text());
+		$('.edit-sa').children('[name="schedule-name"]').attr('value', $(this).children('.schedule-name').text());
+		$('.edit-sa').children('[name="schedule-day"]').attr('value', $(this).children('.schedule-day').text());
+		$('.edit-sa').children('[name="schedule-time"]').attr('value', $(this).children('.schedule-time').text());
+		$('.edit-sa').children('[name="schedule-faculty"]').children('.option-active')
+			.attr('value', $(this).children('.schedule-faculty').text()).text($(this).children('.schedule-faculty').text());
     });
 	
 	$('.register-account').change(function(e) {
